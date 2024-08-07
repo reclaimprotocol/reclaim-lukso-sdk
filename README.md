@@ -4,8 +4,8 @@
 
 | Contract Name | Deployed Address                           | Explorer Link                                                                                       |
 | :------------ | :----------------------------------------- | :-------------------------------------------------------------------------------------------------- |
-| Reclaim       | 0x88cEd91D4966D82912774B9fdf9ca4E065881a91 | https://explorer.execution.testnet.lukso.network/address/0x88cEd91D4966D82912774B9fdf9ca4E065881a91 |
-| ProofStorage  | 0x0E2CF8810B11c2875246d634f030897e77491680 | https://explorer.execution.testnet.lukso.network/address/0x0E2CF8810B11c2875246d634f030897e77491680 |
+| Reclaim       | 0x93a9d327836A5279E835EF3147ac1fb54FBd726B | https://explorer.execution.testnet.lukso.network/address/0x93a9d327836A5279E835EF3147ac1fb54FBd726B |
+| ProofStorage  | 0x9bfAccAF7E28828d6ba4CE6135a552DB6429ff7C | https://explorer.execution.testnet.lukso.network/address/0x9bfAccAF7E28828d6ba4CE6135a552DB6429ff7C |
 
 ## Setup
 
