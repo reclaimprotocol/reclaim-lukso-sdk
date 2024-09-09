@@ -1,5 +1,5 @@
 {
-  "name": "lukso-sdk",
+  "name": "@reclaimprotocol/lukso-sdk",
   "version": "1.0.0",
   "description": "",
   "files": [
@@ -13,8 +13,12 @@
   "keywords": [
     "lukso"
   ],
-  "author": "",
-  "license": "ISC",
+  "license": "See License in <https://github.com/reclaimprotocol/.github/blob/main/LICENSE>",
+  "bugs": {
+		"url": "https://github.com/reclaimprotocol/reclaim-lukso-sdk/issues"
+	},
+	"homepage": "https://github.com/reclaimprotocol/reclaim-lukso-sdk/",
+
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
