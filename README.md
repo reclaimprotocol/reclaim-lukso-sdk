@@ -1,4 +1,8 @@
-# Reclaim - Lukso SDK
+<div>
+    <div>
+        <img src="https://raw.githubusercontent.com/reclaimprotocol/.github/main/assets/banners/Lukso-SDK.png"  />
+    </div>
+</div>
 
 ## Deployments
 
