@@ -18,7 +18,7 @@ task("add-new-epoch", "Start a new epoch")
       `adding witness on "${network.name}" from address "${signerAddress}"`
     );
 
-    const contractAddress = "0x93a9d327836A5279E835EF3147ac1fb54FBd726B"; //Replace with your Contract address
+    const contractAddress = "0x94521c2e16EF1F2682b59918E3b20459fDF48756"; //Replace with your Contract address
     const factory = await ethers.getContractFactory("Reclaim");
     const contract = factory.attach(contractAddress);
 

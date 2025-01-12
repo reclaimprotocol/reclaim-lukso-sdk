@@ -25,12 +25,11 @@ const MOCK_HOST_PREFIX = "localhost:555";
 export async function deployFixture() {
   let signers: SignerWithAddress[] = await ethers.getSigners();
   let owner: SignerWithAddress = signers[0];
-  let proofContract: any = await deployProofStorageContract(ethers, owner);
   let contract: Reclaim = await deployReclaimContract(
     ethers,
-    proofContract.address,
     owner
   );
+  let proofContract: any = await deployProofStorageContract(ethers,  contract.address, owner);
   let { mockWitnesses, witnessesWallets } = await generateMockWitnessesList(
     NUM_WITNESSES,
     MOCK_HOST_PREFIX,

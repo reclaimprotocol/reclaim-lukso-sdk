@@ -36,12 +36,13 @@ export async function randomWallet(
 
 export async function deployProofStorageContract(
   ethers: HardhatEthersHelpers,
-  signer?: Signer
+  owner: string,
+  signer?: Signer,
 ) {
   const [deployer] = await ethers.getSigners();
 
   const factory = await ethers.getContractFactory("ProofStorage", signer);
-  let proofStorage = await factory.deploy(deployer.address);
+  let proofStorage = await factory.deploy(owner);
   await proofStorage.deployed();
   if (signer) {
     proofStorage = proofStorage.connect(signer);
@@ -52,11 +53,10 @@ export async function deployProofStorageContract(
 
 export async function deployReclaimContract(
   ethers: HardhatEthersHelpers,
-  proofStorageAddress: String,
   signer?: Signer
 ) {
   const factory = await ethers.getContractFactory("Reclaim", signer);
-  let reclaim = await factory.deploy(proofStorageAddress);
+  let reclaim = await factory.deploy();
   await reclaim.deployed();
 
   if (signer) {

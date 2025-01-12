@@ -31,9 +31,6 @@ contract ProofStorage is ERC725Y {
         bytes data;
     }
 
-    // Mapping from claim identifiers to their corresponding proofs.
-    mapping(bytes32 => Proof) private proofs;
-
     // Event emitted when a proof is stored.
     event ProofStored(bytes32 indexed claimIdentifier, bytes data);
 
@@ -44,8 +41,8 @@ contract ProofStorage is ERC725Y {
      * @param data The proof data to be stored.
      */
     function storeProof(bytes32 claimIdentifier, bytes memory data) external {
-        // Store the proof in the mapping
-        proofs[claimIdentifier] = Proof(claimIdentifier, data);
+        // Store the proof with ERC725 
+        setData(claimIdentifier, data);
 
         // Emit the ProofStored event to log the storage operation
         emit ProofStored(claimIdentifier, data);
@@ -55,10 +52,10 @@ contract ProofStorage is ERC725Y {
     /**
      * @dev Retrieves a stored proof by its claim identifier.
      * @param claimIdentifier The unique identifier for the claim.
-     * @return The proof associated with the given claim identifier.
+     * @return proof associated with the given claim identifier.
      */
-    function getProof(bytes32 claimIdentifier) external view returns (Proof memory) {
+    function getProof(bytes32 claimIdentifier) external view returns (bytes memory) {
         // Return the proof corresponding to the claim identifier
-        return proofs[claimIdentifier];
+        return getData(claimIdentifier);
     }
 }

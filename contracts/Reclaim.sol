@@ -5,8 +5,7 @@ import "./Claims.sol";
 import "./Random.sol";
 import "./StringUtils.sol";
 import "./BytesUtils.sol";
-
-import "@lukso/lsp-smart-contracts/contracts/LSP0ERC725Account/LSP0ERC725Account.sol";
+import "./ProofStorage.sol";
 
 // import "hardhat/console.sol";
 
@@ -15,35 +14,35 @@ import "@lukso/lsp-smart-contracts/contracts/LSP0ERC725Account/LSP0ERC725Account
  * @dev Interface for the ProofStorage contract that allows storing and retrieving proofs.
  *      A proof is represented by a claim identifier and the corresponding proof data.
  */
-interface IProofStorage {
+// interface IProofStorage {
 
-    /**
-     * @dev Structure to store proof details.
-     * @param claimIdentifier A unique identifier for the claim.
-     * @param data The proof data associated with the claim.
-     */
-    struct Proof {
-        bytes32 claimIdentifier;  // Unique identifier for the claim
-        bytes data;               // Data representing the proof for the claim
-    }
+//     /**
+//      * @dev Structure to store proof details.
+//      * @param claimIdentifier A unique identifier for the claim.
+//      * @param data The proof data associated with the claim.
+//      */
+//     struct Proof {
+//         bytes32 claimIdentifier;  // Unique identifier for the claim
+//         bytes data;               // Data representing the proof for the claim
+//     }
 
-    /**
-     * @dev Stores a proof in the contract.
-     * @param claimIdentifier The unique identifier for the claim.
-     * @param data The proof data to be stored.
-     * @notice This function is intended to be called by external contracts or addresses
-     *         to store proofs in the implementing contract.
-     */
-    function storeProof(bytes32 claimIdentifier, bytes memory data) external;
+//     /**
+//      * @dev Stores a proof in the contract.
+//      * @param claimIdentifier The unique identifier for the claim.
+//      * @param data The proof data to be stored.
+//      * @notice This function is intended to be called by external contracts or addresses
+//      *         to store proofs in the implementing contract.
+//      */
+//     function storeProof(bytes32 claimIdentifier, bytes memory data) external;
 
-    /**
-     * @dev Retrieves a stored proof by its claim identifier.
-     * @param claimIdentifier The unique identifier for the claim.
-     * @return The proof associated with the given claim identifier.
-     * @notice This function allows anyone to retrieve the proof data associated with a claim identifier.
-     */
-    function getProof(bytes32 claimIdentifier) external view returns (Proof memory);
-}
+//     /**
+//      * @dev Retrieves a stored proof by its claim identifier.
+//      * @param claimIdentifier The unique identifier for the claim.
+//      * @return The proof associated with the given claim identifier.
+//      * @notice This function allows anyone to retrieve the proof data associated with a claim identifier.
+//      */
+//     function getProof(bytes32 claimIdentifier) external view returns (Proof memory);
+// }
 
 /**
  * Reclaim Beacon contract
@@ -97,7 +96,7 @@ contract Reclaim {
     /**
 	 * Declaring an instance of the ProofStorage interface
 	 * */
-    IProofStorage public proofStorage;
+    ProofStorage public proofStorage;
 
 
     event EpochAdded(Epoch epoch);
@@ -106,13 +105,12 @@ contract Reclaim {
     /**
     * Constructor to initialize the Reclaim contract
 	* @notice Calls initialize on the base contracts
-    * @param _proofStorage Address of the deployed ProofStorage contract
     */
-    constructor(address _proofStorage) {
+    constructor() {
         epochDurationS = 1 days;
         currentEpoch = 0;
         owner = msg.sender;
-        proofStorage = IProofStorage(_proofStorage);
+        proofStorage = new ProofStorage(address(this));
     }
 
     modifier onlyOwner() {

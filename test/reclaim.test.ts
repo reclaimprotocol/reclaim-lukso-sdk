@@ -71,8 +71,9 @@ describe("Reclaim Witness Fetch Tests", () => {
   let witnesses: Reclaim.WitnessStruct[] = [];
 
   beforeEach(async () => {
-    let proofContract: any = await deployProofStorageContract(ethers);
-    contract = await deployReclaimContract(ethers, proofContract.address);
+    contract = await deployReclaimContract(ethers);
+    let proofContract: any = await deployProofStorageContract(ethers, contract.address);
+
     let { mockWitnesses } = await generateMockWitnessesList(
       NUM_WITNESSES,
       MOCK_HOST_PREFIX,
@@ -200,8 +201,9 @@ describe("Reclaim VerifyProof Tests", () => {
 
 describe("Get Proof Data", () => {
   it("should store and retrieve a proof correctly", async function () {
-    let proofContract: any = await deployProofStorageContract(ethers);
-    let [owner, addr1] = await ethers.getSigners();
+    let [owner] = await ethers.getSigners();
+
+    let proofContract: any = await deployProofStorageContract(ethers, owner.address);
 
     const claimIdentifier =
       "0x930a5687ac463eb8f048bd203659bd8f73119c534969258e5a7c5b8eb0987b16";
@@ -236,7 +238,7 @@ describe("Get Proof Data", () => {
     );
 
     // Store the proof
-    await proofContract.connect(addr1).storeProof(claimIdentifier, encodedData);
+    await proofContract.connect(owner).storeProof(claimIdentifier, encodedData);
 
     // Retrieve the proof
     const proof = await proofContract.getProof(claimIdentifier);
@@ -245,11 +247,11 @@ describe("Get Proof Data", () => {
       [
         "tuple(tuple(string context, string provider, string parameters) claimInfo, tuple(tuple(uint256 epoch, bytes32 identifier, address owner, uint256 timestampS) claim, bytes[] signatures) signedClaim)",
       ],
-      proof.data
+      proof
     );
 
     // Check if the stored proof matches the retrieved proof
-    expect(proof.claimIdentifier).to.equal(claimIdentifier);
+     expect(decodedData[0].signedClaim.claim.identifier).to.equal(claimIdentifier);
     expect(decodedData[0].claimInfo.context).to.equal(data.claimInfo.context);
     expect(decodedData[0].claimInfo.provider).to.equal(data.claimInfo.provider);
     expect(decodedData[0].claimInfo.parameters).to.equal(
