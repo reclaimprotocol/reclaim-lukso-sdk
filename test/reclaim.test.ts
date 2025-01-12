@@ -175,21 +175,21 @@ describe("Reclaim VerifyProof Tests", () => {
       const proof = {
         claimInfo: {
           context:
-            '{"contextAddress":"0x0","contextMessage":"0098967F","providerHash":"0xeda3e4cee88b5cbaec045410a0042f99ab3733a4d5b5eb2da5cecc25aa9e9df1"}',
+            "{\"contextAddress\":\"user's address\",\"contextMessage\":\"for acmecorp.com on 1st january\",\"extractedParameters\":{\"username\":\"hadi-saleh14\"},\"providerHash\":\"0x9d413beed5ff5982df9460e8f4c3d118febd36839f5c9558980856a07369cca5\"}",
           provider: "http",
           parameters:
-            '{"body":"","geoLocation":"in","method":"GET","responseMatches":[{"type":"contains","value":"_steamid\\">Steam ID: 76561198155115943</div>"}],"responseRedactions":[{"jsonPath":"","regex":"_steamid\\">Steam ID: (.*)</div>","xPath":"id(\\"responsive_page_template_content\\")/div[@class=\\"page_header_ctn\\"]/div[@class=\\"page_content\\"]/div[@class=\\"youraccount_steamid\\"]"}],"url":"https://store.steampowered.com/account/"}',
+           "{\"additionalClientOptions\":{},\"body\":\"\",\"geoLocation\":\"\",\"headers\":{\"Referer\":\"https://github.com/settings/profile\",\"Sec-Fetch-Mode\":\"same-origin\",\"User-Agent\":\"Mozilla/5.0 (Linux; Android 15) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.69 Mobile Safari/537.36\"},\"method\":\"GET\",\"paramValues\":{\"username\":\"hadi-saleh14\"},\"responseMatches\":[{\"invert\":false,\"type\":\"contains\",\"value\":\"<span class=\\\"color-fg-muted\\\">({{username}})</span>\"}],\"responseRedactions\":[{\"jsonPath\":\"\",\"regex\":\"<span class=\\\"color-fg-muted\\\">\\\\((.*)\\\\)</span>\",\"xPath\":\"\"}],\"url\":\"https://github.com/settings/profile\"}",
         },
         signedClaim: {
           claim: {
             epoch: epoch.id,
             identifier:
-              "0x930a5687ac463eb8f048bd203659bd8f73119c534969258e5a7c5b8eb0987b16",
-            owner: "0xef27fa8830a070aa6e26703be6f17858b61d3fba",
-            timestampS: 1712685785,
+              "0x937c69accba0809e876033ab5394b6b905104881a8a00f7ae0a6f47bf0e24e1e",
+            owner: "0x08b0292bef7ef2ef839d9f95b709401140ef0b7b",
+            timestampS: 1736693048,
           },
           signatures: [
-            "0xb246a05693f3e21a70eab5dfd5edc1d0597a160c82b8bf9e24d1f09f9dde9899154bb1672c1bf38193a7829e96e4ed09bc327657bf266e90451f6a90c8b45dfb1c",
+            "0x55bb3f5b4b48f5292fb7230f74d4cb5a67c2b0409f53997a1636942c36feed5a3311229e74b85a003515183c70f6b8350397fe290f09c7170dbca11eebfe74291c",
           ],
         },
       };
@@ -206,25 +206,26 @@ describe("Get Proof Data", () => {
     let proofContract: any = await deployProofStorageContract(ethers, owner.address);
 
     const claimIdentifier =
-      "0x930a5687ac463eb8f048bd203659bd8f73119c534969258e5a7c5b8eb0987b16";
+      "0x937c69accba0809e876033ab5394b6b905104881a8a00f7ae0a6f47bf0e24e1e";
 
     const data = {
       claimInfo: {
         context:
-          '{"contextAddress":"0x0","contextMessage":"0098967F","providerHash":"0xeda3e4cee88b5cbaec045410a0042f99ab3733a4d5b5eb2da5cecc25aa9e9df1"}',
+          "{\"contextAddress\":\"user's address\",\"contextMessage\":\"for acmecorp.com on 1st january\",\"extractedParameters\":{\"username\":\"hadi-saleh14\"},\"providerHash\":\"0x9d413beed5ff5982df9460e8f4c3d118febd36839f5c9558980856a07369cca5\"}",
         provider: "http",
         parameters:
-          '{"body":"","geoLocation":"in","method":"GET","responseMatches":[{"type":"contains","value":"_steamid\\">Steam ID: 76561198155115943</div>"}],"responseRedactions":[{"jsonPath":"","regex":"_steamid\\">Steam ID: (.*)</div>","xPath":"id(\\"responsive_page_template_content\\")/div[@class=\\"page_header_ctn\\"]/div[@class=\\"page_content\\"]/div[@class=\\"youraccount_steamid\\"]"}],"url":"https://store.steampowered.com/account/"}',
+         "{\"additionalClientOptions\":{},\"body\":\"\",\"geoLocation\":\"\",\"headers\":{\"Referer\":\"https://github.com/settings/profile\",\"Sec-Fetch-Mode\":\"same-origin\",\"User-Agent\":\"Mozilla/5.0 (Linux; Android 15) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.69 Mobile Safari/537.36\"},\"method\":\"GET\",\"paramValues\":{\"username\":\"hadi-saleh14\"},\"responseMatches\":[{\"invert\":false,\"type\":\"contains\",\"value\":\"<span class=\\\"color-fg-muted\\\">({{username}})</span>\"}],\"responseRedactions\":[{\"jsonPath\":\"\",\"regex\":\"<span class=\\\"color-fg-muted\\\">\\\\((.*)\\\\)</span>\",\"xPath\":\"\"}],\"url\":\"https://github.com/settings/profile\"}",
       },
       signedClaim: {
         claim: {
           epoch: 1,
-          identifier: claimIdentifier,
-          owner: "0xef27fa8830a070aa6e26703be6f17858b61d3fba",
-          timestampS: 1712685785,
+          identifier:
+            "0x937c69accba0809e876033ab5394b6b905104881a8a00f7ae0a6f47bf0e24e1e",
+          owner: "0x08b0292bef7ef2ef839d9f95b709401140ef0b7b",
+          timestampS: 1736693048,
         },
         signatures: [
-          "0xb246a05693f3e21a70eab5dfd5edc1d0597a160c82b8bf9e24d1f09f9dde9899154bb1672c1bf38193a7829e96e4ed09bc327657bf266e90451f6a90c8b45dfb1c",
+          "0x55bb3f5b4b48f5292fb7230f74d4cb5a67c2b0409f53997a1636942c36feed5a3311229e74b85a003515183c70f6b8350397fe290f09c7170dbca11eebfe74291c",
         ],
       },
     };
